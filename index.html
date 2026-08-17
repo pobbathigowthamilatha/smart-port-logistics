@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Powered Smart Port & Logistics Management System</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5.3 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- FontAwesome 6 Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <!-- Custom Style CSS -->
+  <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">
+          <i class="fa-solid fa-anchor"></i>
+        </div>
+        <div class="brand-title">
+          PORT LOGISTICS
+          <span>AI Smart Systems</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-label">Core Operations</div>
+        
+        <a href="#dashboard-view" class="nav-link-item active">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="#vessel-view" class="nav-link-item">
+          <i class="fa-solid fa-ship"></i>
+          <span>Vessel Management</span>
+          <span class="nav-badge">18</span>
+        </a>
+
+        <a href="#cargo-view" class="nav-link-item">
+          <i class="fa-solid fa-boxes-stacked"></i>
+          <span>Cargo Management</span>
+        </a>
+
+        <a href="#truck-view" class="nav-link-item">
+          <i class="fa-solid fa-truck-fast"></i>
+          <span>Truck Management</span>
+          <span class="nav-badge">342</span>
+        </a>
+
+        <a href="#berth-view" class="nav-link-item">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>Berth Visualization</span>
+        </a>
+
+        <div class="nav-label mt-3">Intelligence & Reports</div>
+
+        <a href="#analytics-view" class="nav-link-item">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Analytics</span>
+        </a>
+
+        <a href="#reports-view" class="nav-link-item">
+          <i class="fa-solid fa-file-contract"></i>
+          <span>Reports</span>
+        </a>
+
+        <a href="#ai-view" class="nav-link-item">
+          <i class="fa-solid fa-robot text-cyan"></i>
+          <span>AI Assistant</span>
+          <span class="badge bg-cyan text-dark ms-auto font-sans" style="font-size: 0.65rem;">LIVE</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-status-card">
+          <div class="pulse-dot"></div>
+          <div>
+            <div class="fw-bold text-white small">Terminal Alpha Online</div>
+            <div class="text-muted" style="font-size: 0.7rem;">Telemetry Stream Active</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Navigation Bar -->
+      <header class="topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button class="mobile-toggle" id="mobileToggleBtn">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          
+          <div class="port-selector-wrapper">
+            <i class="fa-solid fa-location-dot"></i>
+            <select class="port-select">
+              <option>Port of Rotterdam - Terminal Alpha</option>
+              <option>Port of Antwerp - Terminal Beta</option>
+              <option>Port of Hamburg - Container Terminal</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="live-clock-badge">
+            <i class="fa-regular fa-clock"></i>
+            <span id="liveClock">Loading Clock...</span>
+          </div>
+
+          <div class="notification-btn" title="System Alerts">
+            <i class="fa-regular fa-bell"></i>
+            <div class="notification-dot"></div>
+          </div>
+
+          <div class="user-profile">
+            <div class="avatar">GL</div>
+            <div class="d-none d-sm-block">
+              <div class="fw-bold text-white small" style="line-height: 1.1;">Gowthami Latha</div>
+              <div class="text-muted" style="font-size: 0.7rem;">Chief Logistics Operator</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Views Container -->
+      <div class="page-container">
+
+        <!-- 1. DASHBOARD VIEW -->
+        <section id="dashboard-view" class="page-view active">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Port Operational Dashboard</h1>
+              <p>Real-time vessel movements, cargo throughput, gate traffic, and telemetry monitoring.</p>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn-secondary-custom" onclick="showPage('reports-view')">
+                <i class="fa-solid fa-download me-1"></i> Quick Export
+              </button>
+              <button class="btn-primary-custom" onclick="showPage('ai-view')">
+                <i class="fa-solid fa-sparkles me-1"></i> Launch AI Assistant
+              </button>
+            </div>
+          </div>
+
+          <!-- Key Metrics Stat Grid -->
+          <div class="row g-3 mb-4">
+            <div class="col-xl-3 col-md-6">
+              <div class="stat-card emerald">
+                <div class="stat-top">
+                  <span class="stat-title">Active Vessels</span>
+                  <div class="stat-icon"><i class="fa-solid fa-ship"></i></div>
+                </div>
+                <div class="stat-value">18</div>
+                <div class="stat-trend trend-up">
+                  <i class="fa-solid fa-arrow-trend-up"></i> +2 vessels docked today
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+              <div class="stat-card purple">
+                <div class="stat-top">
+                  <span class="stat-title">Cargo Processed</span>
+                  <div class="stat-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+                </div>
+                <div class="stat-value">42,500 <span class="fs-6 text-muted font-normal">MT</span></div>
+                <div class="stat-trend trend-up">
+                  <i class="fa-solid fa-arrow-trend-up"></i> +8.4% vs target quota
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+              <div class="stat-card amber">
+                <div class="stat-top">
+                  <span class="stat-title">Trucks Processed Today</span>
+                  <div class="stat-icon"><i class="fa-solid fa-truck-moving"></i></div>
+                </div>
+                <div class="stat-value">342</div>
+                <div class="stat-trend trend-neutral">
+                  <i class="fa-solid fa-clock"></i> 14 min avg gate dwell time
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+              <div class="stat-card rose">
+                <div class="stat-top">
+                  <span class="stat-title">Delayed Shipments</span>
+                  <div class="stat-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                </div>
+                <div class="stat-value">4</div>
+                <div class="stat-trend trend-down">
+                  <i class="fa-solid fa-arrow-trend-down"></i> -2 resolved since 08:00
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Berth Occupancy Quick Ribbon -->
+          <div class="card-custom mb-4">
+            <div class="card-header-custom">
+              <h5><i class="fa-solid fa-layer-group"></i> Berth Occupancy Live Telemetry</h5>
+              <button class="btn-secondary-custom btn-sm" onclick="showPage('berth-view')">
+                View Full Terminal Layout <i class="fa-solid fa-arrow-right ms-1"></i>
+              </button>
+            </div>
+            <div class="berth-ribbon" id="berthQuickRibbon">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Charts Row 1 -->
+          <div class="row g-4 mb-4">
+            <div class="col-lg-8">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <h5><i class="fa-solid fa-chart-column"></i> Cargo Volume & Processing Quota</h5>
+                  <span class="badge bg-secondary-subtle text-muted">Hourly Metric Tons</span>
+                </div>
+                <div style="height: 300px;">
+                  <canvas id="dashCargoChart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <h5><i class="fa-solid fa-pie-chart"></i> Cargo Status Breakdown</h5>
+                </div>
+                <div style="height: 300px;">
+                  <canvas id="dashStatusChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vessel Movements Line Chart & Recent Activity -->
+          <div class="row g-4 mb-4">
+            <div class="col-lg-6">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <h5><i class="fa-solid fa-route"></i> Vessel Movements (Arrivals vs Departures)</h5>
+                </div>
+                <div style="height: 280px;">
+                  <canvas id="dashVesselChart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <h5><i class="fa-solid fa-robot text-cyan"></i> AI Assistant Operational Insights</h5>
+                </div>
+                <div class="p-3 rounded-3 mb-3" style="background: rgba(6, 182, 212, 0.08); border: 1px solid var(--border-color);">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="fa-solid fa-lightbulb text-warning fs-5"></i>
+                    <strong class="text-white">AI Recommendation</strong>
+                  </div>
+                  <p class="text-muted small mb-0">
+                    Berth B-03 maintenance is on schedule to complete at 06:00 tomorrow. Re-routing incoming container ship <em>Atlantic Breeze</em> to Berth B-06 will optimize terminal crane usage by 14%.
+                  </p>
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                  <button class="prompt-chip" onclick="showPage('ai-view'); handlePromptClick('delayed', 'Show delayed cargo shipments.');">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Show Delayed Cargo
+                  </button>
+                  <button class="prompt-chip" onclick="showPage('ai-view'); handlePromptClick('highest', 'Which vessel handled the highest cargo volume?');">
+                    <i class="fa-solid fa-trophy"></i> Volume Leader
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tables Row: Recent Activity -->
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <h5><i class="fa-solid fa-ship"></i> Recent Vessel Activity</h5>
+                </div>
+                <div class="table-responsive">
+                  <table class="table-custom">
+                    <thead>
+                      <tr><th>Vessel Name</th><th>Berth</th><th>Status</th><th>Departure</th></tr>
+                    </thead>
+                    <tbody id="dashRecentVessels">
+                      <!-- Rendered JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <h5><i class="fa-solid fa-boxes-stacked"></i> Recent Cargo Feeds</h5>
+                </div>
+                <div class="table-responsive">
+                  <table class="table-custom">
+                    <thead>
+                      <tr><th>Cargo ID</th><th>Type</th><th>Yard Block</th><th>Status</th></tr>
+                    </thead>
+                    <tbody id="dashRecentCargo">
+                      <!-- Rendered JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- 2. VESSEL MANAGEMENT VIEW -->
+        <section id="vessel-view" class="page-view">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Vessel Management</h1>
+              <p>Monitor vessel arrivals, IMO credentials, berth assignments, and departure manifests.</p>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn-secondary-custom" onclick="alert('Exporting Vessel Manifest to CSV...')">
+                <i class="fa-solid fa-file-csv me-1"></i> Export Manifest
+              </button>
+              <button class="btn-primary-custom" onclick="openRegisterVesselModal()">
+                <i class="fa-solid fa-plus me-1"></i> Register New Vessel
+              </button>
+            </div>
+          </div>
+
+          <!-- Filter Bar -->
+          <div class="filter-bar">
+            <div class="search-input-group">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" class="search-input" id="vesselSearchInput" placeholder="Search Vessel Name, IMO Number, ID..." onkeyup="filterVessels()">
+            </div>
+            <div class="d-flex gap-2">
+              <select class="select-custom" id="vesselStatusFilter" onchange="filterVessels()">
+                <option value="all">All Statuses</option>
+                <option value="docked">Docked</option>
+                <option value="anchored">Anchored</option>
+                <option value="in transit">In Transit</option>
+                <option value="departed">Departed</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Vessels Table -->
+          <div class="table-custom-wrapper">
+            <table class="table-custom">
+              <thead>
+                <tr>
+                  <th>Vessel ID</th>
+                  <th>Vessel Name & Flag</th>
+                  <th>IMO Number</th>
+                  <th>Arrival Date/Time</th>
+                  <th>Departure Date/Time</th>
+                  <th>Cargo Capacity</th>
+                  <th>Assigned Berth</th>
+                  <th>Current Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="vesselsTableBody">
+                <!-- Rendered JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+
+        <!-- 3. CARGO MANAGEMENT VIEW -->
+        <section id="cargo-view" class="page-view">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Cargo Management</h1>
+              <p>Track container inventory, bulk weight specs, customs holds, and yard placement.</p>
+            </div>
+            <button class="btn-primary-custom" onclick="alert('Add New Cargo Container Triggered')">
+              <i class="fa-solid fa-box-archive me-1"></i> Add Cargo Manifest
+            </button>
+          </div>
+
+          <!-- Metric Cards -->
+          <div class="row g-3 mb-4">
+            <div class="col-md-3">
+              <div class="p-3 rounded-3 text-center" style="background: var(--bg-surface); border: 1px solid var(--border-color);">
+                <div class="text-muted small">Total Inventory Weight</div>
+                <div class="fw-bold fs-4 text-white">42,500 MT</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="p-3 rounded-3 text-center" style="background: var(--bg-surface); border: 1px solid var(--border-color);">
+                <div class="text-muted small">Containers in Yard</div>
+                <div class="fw-bold fs-4 text-cyan">2,480 TEUs</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="p-3 rounded-3 text-center" style="background: var(--bg-surface); border: 1px solid var(--border-color);">
+                <div class="text-muted small">Customs Holds</div>
+                <div class="fw-bold fs-4 text-rose">4 Shipments</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="p-3 rounded-3 text-center" style="background: var(--bg-surface); border: 1px solid var(--border-color);">
+                <div class="text-muted small">Outbound Discharged</div>
+                <div class="fw-bold fs-4 text-emerald">1,820 TEUs</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter Bar -->
+          <div class="filter-bar">
+            <div class="search-input-group">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" class="search-input" id="cargoSearchInput" placeholder="Search Cargo ID, Vessel Name, Container Type..." onkeyup="filterCargo()">
+            </div>
+            <select class="select-custom" id="cargoTypeFilter" onchange="filterCargo()">
+              <option value="all">All Cargo Categories</option>
+              <option value="Containerized">Containerized</option>
+              <option value="Dry Bulk">Dry Bulk</option>
+              <option value="Liquid Bulk">Liquid Bulk</option>
+              <option value="Breakbulk">Breakbulk</option>
+            </select>
+          </div>
+
+          <!-- Cargo Table -->
+          <div class="table-custom-wrapper">
+            <table class="table-custom">
+              <thead>
+                <tr>
+                  <th>Cargo ID</th>
+                  <th>Cargo Specification</th>
+                  <th>Weight (MT)</th>
+                  <th>Source Port</th>
+                  <th>Destination</th>
+                  <th>Assigned Vessel</th>
+                  <th>Assigned Yard</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="cargoTableBody">
+                <!-- Rendered JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+
+        <!-- 4. TRUCK MANAGEMENT VIEW -->
+        <section id="truck-view" class="page-view">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Truck & Gate Management</h1>
+              <p>Monitor gate traffic, driver check-ins, queue length, and exit verification timestamps.</p>
+            </div>
+            <button class="btn-primary-custom" onclick="openGateRegisterModal()">
+              <i class="fa-solid fa-trailer me-1"></i> Register Gate Entry
+            </button>
+          </div>
+
+          <!-- Gate Overview Metrics -->
+          <div class="row g-3 mb-4">
+            <div class="col-md-4">
+              <div class="stat-card emerald">
+                <div class="stat-top">
+                  <span class="stat-title">Active Gate Lanes</span>
+                  <div class="stat-icon"><i class="fa-solid fa-door-open"></i></div>
+                </div>
+                <div class="stat-value">6 / 6 Open</div>
+                <div class="stat-trend trend-up">All automated RFID lanes operational</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="stat-card amber">
+                <div class="stat-top">
+                  <span class="stat-title">Average Gate Dwell Time</span>
+                  <div class="stat-icon"><i class="fa-solid fa-stopwatch"></i></div>
+                </div>
+                <div class="stat-value">14.2 Mins</div>
+                <div class="stat-trend trend-neutral">Target: &lt; 15 mins</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="stat-card purple">
+                <div class="stat-top">
+                  <span class="stat-title">Truck Queue Length</span>
+                  <div class="stat-icon"><i class="fa-solid fa-list-ol"></i></div>
+                </div>
+                <div class="stat-value">8 Vehicles</div>
+                <div class="stat-trend trend-up">Smooth traffic flow</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trucks Table -->
+          <div class="table-custom-wrapper">
+            <table class="table-custom">
+              <thead>
+                <tr>
+                  <th>Plate Number</th>
+                  <th>Driver Name & Company</th>
+                  <th>Cargo Reference</th>
+                  <th>Entry Time</th>
+                  <th>Exit Time</th>
+                  <th>Gate Lane</th>
+                  <th>Gate Status</th>
+                  <th>Queue Status</th>
+                </tr>
+              </thead>
+              <tbody id="trucksTableBody">
+                <!-- Rendered JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+
+        <!-- 5. BERTH / TERMINAL VISUALIZATION VIEW -->
+        <section id="berth-view" class="page-view">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Graphical Terminal & Berth Layout</h1>
+              <p>Interactive spatial map of berths, piers, and quay crane allocations.</p>
+            </div>
+            <div class="legend-bar">
+              <div class="legend-item"><div class="legend-color available"></div> Available (Green)</div>
+              <div class="legend-item"><div class="legend-color occupied"></div> Occupied (Red)</div>
+              <div class="legend-item"><div class="legend-color maintenance"></div> Maintenance / Reserved (Yellow)</div>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            <!-- Terminal Canvas Grid -->
+            <div class="col-lg-8">
+              <div class="terminal-layout-card">
+                <div class="water-watermark">
+                  <i class="fa-solid fa-water"></i>
+                </div>
+
+                <div class="pier-section-title">
+                  <i class="fa-solid fa-anchor"></i> Pier Alpha - Deepwater Berths (01 - 04)
+                </div>
+                <div class="berths-grid mb-4" id="berthsGridContainer">
+                  <!-- Rendered via JS -->
+                </div>
+
+                <div class="pier-section-title">
+                  <i class="fa-solid fa-anchor"></i> Pier Beta - Container & Ro-Ro Berths (05 - 08)
+                </div>
+              </div>
+            </div>
+
+            <!-- Selected Berth Inspector Panel -->
+            <div class="col-lg-4" id="berthInspectorPanel">
+              <div class="card-custom text-center py-5">
+                <i class="fa-solid fa-hand-pointer text-cyan display-4 mb-3"></i>
+                <h5 class="text-white">Select a Berth Node</h5>
+                <p class="text-muted small">Click any berth on the terminal map to inspect vessel specs, crane status, and operational schedules.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- 6. ANALYTICS VIEW -->
+        <section id="analytics-view" class="page-view">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Operational Analytics</h1>
+              <p>Historical trends, vessel turnaround efficiency, and capacity utilization analytics.</p>
+            </div>
+            <div class="d-flex gap-2">
+              <select class="select-custom" id="analyticsPeriod">
+                <option>Today (Aug 16)</option>
+                <option>Last 7 Days</option>
+                <option selected>Last 30 Days</option>
+                <option>Year to Date (2026)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Charts Matrix -->
+          <div class="row g-4 mb-4">
+            <div class="col-lg-6">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <h5><i class="fa-solid fa-chart-line"></i> Cargo Volume Growth Trends</h5>
+                </div>
+                <div style="height: 280px;">
+                  <canvas id="analyticsVolChart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <h5><i class="fa-solid fa-ship"></i> Vessel Category Movements</h5>
+                </div>
+                <div style="height: 280px;">
+                  <canvas id="analyticsVesselChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <h5><i class="fa-solid fa-compass-drafting"></i> Berth Utilization Radar Chart</h5>
+                </div>
+                <div style="height: 280px;">
+                  <canvas id="analyticsBerthChart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <h5><i class="fa-solid fa-warehouse"></i> Yard Block Capacity Breakdown</h5>
+                </div>
+                <div style="height: 280px;">
+                  <canvas id="analyticsYardChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- 7. REPORTS VIEW -->
+        <section id="reports-view" class="page-view">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Operational Reports & Audits</h1>
+              <p>Generate, preview, and download compliance and performance report manifests.</p>
+            </div>
+            <button class="btn-primary-custom" onclick="alert('Generate Custom Report Triggered')">
+              <i class="fa-solid fa-file-circle-plus me-1"></i> Generate Custom Report
+            </button>
+          </div>
+
+          <!-- Reports List Container -->
+          <div class="row g-4" id="reportsListContainer">
+            <!-- Rendered JS -->
+          </div>
+        </section>
+
+
+        <!-- 8. AI OPERATIONS ASSISTANT VIEW -->
+        <section id="ai-view" class="page-view">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>AI Operations Assistant</h1>
+              <p>Conversational port telemetry assistant for operational summaries, delays, and analytics queries.</p>
+            </div>
+          </div>
+
+          <!-- Chat UI Wrapper -->
+          <div class="chat-container">
+            <div class="chat-header">
+              <div class="d-flex align-items-center gap-3">
+                <div class="ai-avatar">
+                  <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                  <h5 class="text-white mb-0">Port Intelligence Agent</h5>
+                  <span class="text-muted small"><i class="fa-solid fa-circle text-emerald me-1" style="font-size: 0.6rem;"></i> Connected to Port Telemetry Engine</span>
+                </div>
+              </div>
+              <span class="badge bg-purple-subtle text-purple border border-purple px-3 py-1">Enterprise Demo Mode</span>
+            </div>
+
+            <div class="chat-body" id="aiChatBody">
+              <!-- Initial Welcome Message -->
+              <div class="chat-msg ai-msg">
+                <div class="ai-avatar">
+                  <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="chat-bubble">
+                  <div class="fw-bold text-cyan mb-1">Hello, Operator Gowthami!</div>
+                  I am your AI Operations Assistant. I monitor real-time vessel positions, cargo discharge progress, truck gate queues, and customs holds across Terminal Alpha.
+                  <br><br>
+                  Choose an example question below or type your custom query:
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Prompt Chips -->
+            <div class="prompt-chips-wrapper">
+              <button class="prompt-chip" onclick="handlePromptClick('delayed', 'Show delayed cargo shipments.')">
+                <i class="fa-solid fa-triangle-exclamation text-rose"></i> Show delayed cargo shipments
+              </button>
+              <button class="prompt-chip" onclick="handlePromptClick('summary', 'Generate today\'s operations summary.')">
+                <i class="fa-solid fa-file-lines text-cyan"></i> Generate today's operations summary
+              </button>
+              <button class="prompt-chip" onclick="handlePromptClick('highest', 'Which vessel handled the highest cargo volume?')">
+                <i class="fa-solid fa-trophy text-amber"></i> Which vessel handled highest cargo volume?
+              </button>
+              <button class="prompt-chip" onclick="handlePromptClick('weekly', 'Provide a weekly logistics performance report.')">
+                <i class="fa-solid fa-chart-simple text-emerald"></i> Provide weekly performance report
+              </button>
+            </div>
+
+            <div class="chat-footer">
+              <input type="text" class="chat-input" id="aiChatInput" placeholder="Type a port logistics query... (e.g. Show delayed cargo)" onkeypress="if(event.key === 'Enter') sendAiUserMessage()">
+              <button class="btn-primary-custom" onclick="sendAiUserMessage()">
+                <i class="fa-solid fa-paper-plane me-1"></i> Send
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Global Modal for Details & Registration -->
+  <div class="modal fade" id="globalModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content modal-content-custom">
+        <div class="modal-header modal-header-custom">
+          <h5 id="globalModalTitle">Modal Title</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body modal-body-custom" id="globalModalBody">
+          <!-- Dynamic Content -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5.3 JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Application Scripts -->
+  <script src="./static/js/data.js"></script>
+  <script src="./static/js/charts.js"></script>
+  <script src="./static/js/berth.js"></script>
+  <script src="./static/js/ai-assistant.js"></script>
+  <script src="./static/js/app.js"></script>
+</body>
+</html>
