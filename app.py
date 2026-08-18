@@ -305,7 +305,7 @@ def ensure_demo_user():
         db.commit()
     finally:
         db.close()
-
+ensure_demo_user()
 
 def authenticate_user(email_or_username, password):
     """Validate the single configured demo account."""
