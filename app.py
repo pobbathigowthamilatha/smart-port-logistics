@@ -195,6 +195,7 @@ def build_ai_operational_context():
 def _groq_error_message(exc):
     """Normalize API exceptions into a user-safe Groq error message."""
     message = str(exc).strip()
+    print("[GROQ ERROR]", repr(exc), flush=True)
     lower = message.lower()
 
     if not message:
