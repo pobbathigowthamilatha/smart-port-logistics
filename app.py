@@ -242,7 +242,7 @@ Answer the user question using this data. If relevant, include concise operation
 """
 
         message = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="llama-3.1-8b-instant",
             messages=[
                 {"role": "system", "content": "You are a port operations assistant. Provide accurate, concise answers based only on the provided port telemetry data."},
                 {"role": "user", "content": prompt}
