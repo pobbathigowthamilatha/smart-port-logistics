@@ -17,6 +17,7 @@ except ImportError:  # pragma: no cover
     letter = None
 
 app = Flask(__name__)
+init_db()
 app.config["SECRET_KEY"] = os.getenv("FLASK_SECRET_KEY") or os.urandom(32)
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "database.db")
 DEMO_USER_EMAIL = "gowthamiproject1@gmail.com"
